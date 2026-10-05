@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "BI_MINI_PROJECT"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "82824558-f842-4ece-8f20-1c9bf00d5b62"
+  }
+}
