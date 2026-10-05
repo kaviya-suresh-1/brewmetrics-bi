@@ -1,6 +1,43 @@
 table Fact_Sales
 	lineageTag: 00de0341-89de-404c-bb9b-82d8fe33b115
 
+	measure 'Total Sales' =
+			
+			SUM(Fact_Sales[sales_amount])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 697a772b-9c77-4edf-8242-c51eed61cef6
+
+	measure 'Total Quantity' =
+			
+			SUM(Fact_Sales[quantity])
+		formatString: 0
+		lineageTag: f9d474ad-138c-4d7c-8fe3-ae4bb6e37be9
+
+	measure 'Average Order Value' =
+			
+			DIVIDE(
+			    [Total Sales],
+			    DISTINCTCOUNT(Fact_Sales[sale_id])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: d0b26a35-0f55-412b-aa41-784d121ed84d
+
+	measure 'Sales YoY %' =
+			
+			VAR CurrentSales = [Total Sales]
+			VAR PreviousSales =
+			    CALCULATE(
+			        [Total Sales],
+			        SAMEPERIODLASTYEAR(Dim_Date[date])
+			    )
+			RETURN
+			    DIVIDE(
+			        CurrentSales - PreviousSales,
+			        PreviousSales
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 83d719cb-db64-4d95-92c7-c7150fbd3d22
+
 	column sale_id
 		dataType: int64
 		formatString: 0
