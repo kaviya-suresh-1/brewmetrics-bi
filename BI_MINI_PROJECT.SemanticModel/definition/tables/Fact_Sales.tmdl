@@ -38,6 +38,31 @@ table Fact_Sales
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 83d719cb-db64-4d95-92c7-c7150fbd3d22
 
+	measure 'Running Total Sales' =
+			
+			CALCULATE(
+			    [Total Sales],
+			    FILTER(
+			        ALL(Dim_Date[date]),
+			        Dim_Date[date] <= MAX(Dim_Date[date])
+			    )
+			)
+		lineageTag: 9502dbac-3fd4-4657-bb13-b0f7200748aa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'City Sales Rank' =
+			
+			RANKX(
+			    ALL(Dim_City[city]),
+			    [Total Sales],
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: e6331466-4f8f-4937-ade4-af67c05f0bab
+
 	column sale_id
 		dataType: int64
 		formatString: 0

@@ -40,8 +40,18 @@ table Dim_Date
 		lineageTag: 2e28f80b-a8ab-441d-b9a1-374ad47a6565
 		summarizeBy: none
 		sourceColumn: Month Name
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Year Hierarchy'
+		lineageTag: 243b9df4-930f-4863-86e7-4d349d0fc3b4
+
+		level Year
+			lineageTag: a618e633-15f4-4693-b58a-69d9e8e36029
+			column: Year
 
 	partition Dim_Date = m
 		mode: import
